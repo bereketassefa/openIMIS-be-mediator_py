@@ -5,16 +5,16 @@ from .job import fetch_data_from_server
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_jobstore(DjangoJobStore(), "default")  # Store jobs in database
+    scheduler.add_jobstore(DjangoJobStore(), "default")  
 
     scheduler.add_job(
         fetch_data_from_server,
-        trigger='interval',  # Can also use 'cron' for cron-like syntax
-        minutes=5,           # Runs every 5 minutes
-        id='fetch_data',     # Unique ID for the job
+        trigger='interval',  
+        minutes=0.6,           
+        id='fetch_data',     
         replace_existing=True,
     )
 
-    register_events(scheduler)  # Optional: for job execution logging
+    register_events(scheduler)  
     scheduler.start()
     print("Scheduler started!")
